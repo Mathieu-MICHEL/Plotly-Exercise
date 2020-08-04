@@ -1,0 +1,44 @@
+---
+title: "R Markdown Presentation & Plotly"
+author: "Mathieu MICHEL"
+date: "04/08/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+library(xlsx)
+library(tidyverse)
+```
+
+## Data 
+
+To complete the **Peer-graded Assignment: R Markdown Presentation & Plotly**.
+I use a very small dataset of cities with their population, derived from https://en.wikipedia.org/wiki/List_of_largest_cities
+
+```{r data, echo = FALSE}
+data <- read.xlsx("Largest Cities.xlsx",1)
+print(data)
+```
+
+
+
+## Plot
+
+```{r plotly, echo = FALSE}
+# data$city <- as.factor(data$city)
+# levels(data$city) <- data[order(data$pop,decreasing = T),]$city
+data$city <- factor(data$city, levels = data$city)
+
+fig <- plot_ly(x = data$pop, 
+               y = data$city, 
+               type = 'bar', 
+               orientation = 'h',
+               marker = list(color = 'rgba(188, 0, 45, 1)'))
+fig
+```
+
+## Thank you
+
+
